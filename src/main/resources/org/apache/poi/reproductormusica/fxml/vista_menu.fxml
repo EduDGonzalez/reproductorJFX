@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="530.0" prefWidth="425.0" styleClass="fondo" stylesheets="@../css/Persona5Theme.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.apache.poi.reproductormusica.Vista_menuController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="707.0" prefWidth="599.0" styleClass="fondo" stylesheets="@../css/Persona5Theme.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.apache.poi.reproductormusica.Vista_menuController">
    <children>
          <fx:include fx:id="vistaPrincipal" source="VistaPrincipal.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <HBox fx:id="menuHBox" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox fx:id="menuHBox" prefHeight="707.0" prefWidth="273.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox fx:id="menu" prefWidth="160.0" styleClass="menuVBox">
+            <VBox fx:id="menu" prefHeight="707.0" prefWidth="248.0" styleClass="menuVBox">
                <children>
-                  <Button fx:id="botonAbrirCancion" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirCancion" prefHeight="58.0" prefWidth="150.0" styleClass="botonAbrirCancion">
+                  <Button fx:id="botonAbrirCancion" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirCancion" prefHeight="105.0" prefWidth="238.0" styleClass="botonAbrirCancion">
                      <VBox.margin>
                         <Insets bottom="1.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>

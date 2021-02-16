@@ -29,3 +29,9 @@ and open the template in the editor.
 .botonAbrirCancion:hover{ 
     -fx-background-size: 280 210;
 }
+.botonAbrirCancion:pressed{
+    -fx-background-image: url("/imagenes/abrirPressed.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 280 210;
+    -fx-background-position:left center;
+}

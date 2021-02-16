@@ -15,7 +15,7 @@ public class App extends Application {
 
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/vista_menu.fxml"));
-        Scene scene = new Scene(root, 400, 500);
+        Scene scene = new Scene(root, 600, 700);
         //scene.getStylesheets().add(getClass().getResource("css/ReproductorCSS1.css").toString());
         stage.setScene(scene);
         stage.setResizable(false);
