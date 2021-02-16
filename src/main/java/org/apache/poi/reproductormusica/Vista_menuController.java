@@ -17,10 +17,11 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Duration;
-import org.apache.poi.reproductormusica.Cancion;
 
 /**
  * FXML Controller class
@@ -55,13 +56,13 @@ public class Vista_menuController implements Initializable {
 
     @FXML
     private VistaPrincipalController vistaPrincipalController;
-
+    
     boolean mostrar = true;
     private TranslateTransition animacionMenu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+     
         menuHBox.setTranslateX(-menu.getPrefWidth());
         animacionMenu = new TranslateTransition(Duration.seconds(.20), menuHBox);
 

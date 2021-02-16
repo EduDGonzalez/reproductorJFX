@@ -18,7 +18,7 @@ public class App extends Application {
         Scene scene = new Scene(root, 400, 500);
         //scene.getStylesheets().add(getClass().getResource("css/ReproductorCSS1.css").toString());
         stage.setScene(scene);
-        //stage.setResizable(false);
+        stage.setResizable(false);
         stage.show();
     }
 
