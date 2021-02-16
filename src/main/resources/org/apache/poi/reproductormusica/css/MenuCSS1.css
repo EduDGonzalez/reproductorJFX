@@ -1,0 +1,44 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16 feb. 2021, 10:37:41
+    Author     : edudg
+*/
+
+.fondo{
+    -fx-background-color: #0A0A0A;
+    
+    
+    /*-fx-background-image: url("/imagenes/logo_2.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 300 280;
+    -fx-background-position: center;*/
+}
+.barraMenu{
+    -fx-background-color: rgba(52, 209, 70, 0.6);
+}
+.botonesMenu{
+    -fx-text-fill: black;
+    -fx-font-size: 12pt;
+    -fx-background-color:transparent;
+}
+.botonesMenu:hover{
+    -fx-text-fill: #33FF57;
+    -fx-font-size: 14pt;
+    -fx-background-color:transparent;
+}
+
+.botonMenu{
+   -fx-border-color: green;
+   -fx-border-width: 2;
+   -fx-text-fill: green;
+   -fx-font-size: 15pt;
+   -fx-background-color:transparent;
+}
+.botonMenu:hover{
+    -fx-text-fill: #33FF57;
+    -fx-background-color:transparent;
+}
