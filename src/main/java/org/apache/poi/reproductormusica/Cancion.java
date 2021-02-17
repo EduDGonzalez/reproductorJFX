@@ -85,5 +85,10 @@ public class Cancion {
         }
     }
     
+    @Override
+    public String toString(){
+        return this.getCancion();
+    }
+    
     
 }

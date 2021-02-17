@@ -74,7 +74,7 @@ public class VistaPrincipalController implements Initializable {
     @FXML
     void pulsadoAtras() throws IOException {
         if (cancionActual == 0) {
-            reproductor.seek(Duration.ZERO);
+        reproductor.seek(Duration.ZERO);
         } else {
             reproductor.stop();
             presentarMedio(listaReproduccion.get(cancionActual - 1));
@@ -85,13 +85,12 @@ public class VistaPrincipalController implements Initializable {
     @FXML
     void pulsarAlante() throws IOException {
         if (cancionActual == listaReproduccion.size()-1) {
-            reproductor.seek(reproductor.getTotalDuration());
+        reproductor.seek(reproductor.getTotalDuration());
         } else {
             reproductor.stop();
             presentarMedio(listaReproduccion.get(cancionActual + 1));
             cancionActual++;
         }
-
     }
 
     public VistaPrincipalController() {
@@ -185,8 +184,25 @@ public class VistaPrincipalController implements Initializable {
     }
 
     public void setCancion(Cancion cancion) {
-        this.cancion = cancion;
-        presentarMedio();
+        if(reproductor ==null){
+            this.cancion = cancion;
+            presentarMedio(this.cancion);
+        }else{
+            reproductor.stop();
+            this.cancion = cancion;
+            presentarMedio(this.cancion);
+        }
+    }
+    public void setCancion(Cancion cancion,int index) {
+        if(reproductor ==null){
+            this.cancion = cancion;
+            presentarMedio(this.cancion);
+        }else{
+            reproductor.stop();
+            this.cancion = cancion;
+            presentarMedio(this.cancion);
+        }
+        this.cancionActual  = index;
     }
 
     public List<Cancion> getListaReproduccion() {
@@ -195,7 +211,7 @@ public class VistaPrincipalController implements Initializable {
 
     public void setListaReproduccion(List<Cancion> listaReproduccion) {
         this.listaReproduccion = listaReproduccion;
-        presentarMedio(this.listaReproduccion.get(cancionActual));
+        //presentarMedio(this.listaReproduccion.get(cancionActual));
     }
 
 }

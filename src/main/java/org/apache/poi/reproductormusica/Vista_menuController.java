@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -46,6 +47,9 @@ public class Vista_menuController implements Initializable {
     private AnchorPane root;
 
     @FXML
+    private AnchorPane boxReproductor;
+
+    @FXML
     private Button botonAbrirCancion;
 
     @FXML
@@ -61,23 +65,29 @@ public class Vista_menuController implements Initializable {
     private Button botonMenu;
 
     @FXML
-    private Button botonLista;
+    private Button botonVolver;
+
+    @FXML
+    private ListView lista;
 
     @FXML
     private VistaPrincipalController vistaPrincipalController;
 
     boolean mostrarMenu = true;
-    boolean mostrarLista = true;
+    boolean mostrarRepro = true;
     private TranslateTransition animacionMenu;
-    private TranslateTransition animacionLista;
+    private TranslateTransition animacionReproductor;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        boxReproductor.setTranslateX(root.getPrefWidth());
         menuHBox.setTranslateX(-menu.getPrefWidth());
         animacionMenu = new TranslateTransition(Duration.seconds(.20), menuHBox);
-        animacionLista = new TranslateTransition(Duration.seconds(.20), listaHBox);
-
+        animacionReproductor = new TranslateTransition(Duration.seconds(.5), boxReproductor);
+        lista.setOnMouseClicked((t) -> {
+            vistaPrincipalController.setCancion((Cancion) lista.getSelectionModel().getSelectedItem(), lista.getSelectionModel().getSelectedIndex());
+            mostrarRepro();
+        });
     }
 
     @FXML
@@ -87,6 +97,11 @@ public class Vista_menuController implements Initializable {
         fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"));
         Cancion cancion = new Cancion(fileChooser.showOpenDialog(null));
         vistaPrincipalController.setCancion(cancion);
+    }
+
+    @FXML
+    void volverLista(ActionEvent event) throws IOException {
+        mostrarRepro();
     }
 
     @FXML
@@ -106,6 +121,7 @@ public class Vista_menuController implements Initializable {
             Cancion song = new Cancion(file);
             olist.add(song);
         }
+        lista.setItems(olist);
         vistaPrincipalController.setListaReproduccion(olist);
     }
 
@@ -131,19 +147,22 @@ public class Vista_menuController implements Initializable {
         animacionMenu.play();
     }
 
-    @FXML
-    void mostrarLista(ActionEvent event) throws IOException {
-        if (mostrarLista) {
-            animacionLista.setFromX(-menu.getPrefWidth());
-            animacionLista.setToX(0);
-            botonMenu.setText("<");
-            mostrarLista = false;
-        } else {
-            animacionLista.setFromX(0);
-            animacionLista.setToX(-menu.getPrefWidth());
-            botonMenu.setText(">");
-            mostrarLista = true;
+    void mostrarRepro() {
+        if (mostrarRepro) {
+            animacionReproductor.setFromX(root.getPrefWidth());
+            animacionReproductor.setToX(0);
+            mostrarRepro=false;
+        }else{
+            animacionReproductor.setFromX(0);
+            animacionReproductor.setToX(root.getPrefWidth());
+            mostrarRepro=true;
         }
-        animacionMenu.play();
+        animacionReproductor.play();
+    }
+
+    void ocultarRepro() {
+        animacionReproductor.setFromX(0);
+        animacionReproductor.setToX(root.getPrefWidth());
+        animacionReproductor.play();
     }
 }
