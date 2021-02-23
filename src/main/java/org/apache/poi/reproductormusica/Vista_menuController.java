@@ -19,6 +19,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -67,9 +69,18 @@ public class Vista_menuController implements Initializable {
     @FXML
     private Button botonVolver;
 
-    @FXML
-    private ListView lista;
-
+    @FXML 
+    private TableView<Cancion> vistaTabla;
+    
+    @FXML 
+    private TableColumn<Cancion,String> columnaTitulo;
+    
+    @FXML 
+    private TableColumn<Cancion,String> columnaAlbun;
+    
+    @FXML 
+    private TableColumn<Cancion,String> columnaAutor;
+    
     @FXML
     private VistaPrincipalController vistaPrincipalController;
 
@@ -84,10 +95,10 @@ public class Vista_menuController implements Initializable {
         menuHBox.setTranslateX(-menu.getPrefWidth());
         animacionMenu = new TranslateTransition(Duration.seconds(.20), menuHBox);
         animacionReproductor = new TranslateTransition(Duration.seconds(.5), boxReproductor);
-        lista.setOnMouseClicked((t) -> {
-            vistaPrincipalController.setCancion((Cancion) lista.getSelectionModel().getSelectedItem(), lista.getSelectionModel().getSelectedIndex());
+        vistaTabla.getSelectionModel().selectedItemProperty().addListener((o) -> {
+            vistaPrincipalController.setCancion(vistaTabla.getSelectionModel().getSelectedItem(), vistaTabla.getSelectionModel().getSelectedIndex());
             mostrarRepro();
-        });
+        });   
     }
 
     @FXML
@@ -97,6 +108,8 @@ public class Vista_menuController implements Initializable {
         fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac"));
         Cancion cancion = new Cancion(fileChooser.showOpenDialog(null));
         vistaPrincipalController.setCancion(cancion);
+        animacionMostrarMenu();
+        mostrarRepro();
     }
 
     @FXML
@@ -105,7 +118,7 @@ public class Vista_menuController implements Initializable {
     }
 
     @FXML
-    void abrirCarpeta(ActionEvent event) throws IOException {
+    void abrirCarpeta(ActionEvent event) throws IOException, InterruptedException {
         ObservableList<Cancion> olist = FXCollections.observableArrayList();
         DirectoryChooser fileChooser = new DirectoryChooser();
         fileChooser.setTitle("Open Resource File");
@@ -121,7 +134,11 @@ public class Vista_menuController implements Initializable {
             Cancion song = new Cancion(file);
             olist.add(song);
         }
-        lista.setItems(olist);
+        System.out.println(olist.size());
+        vistaTabla.setItems(olist);
+        columnaTitulo.setCellValueFactory(cellData -> cellData.getValue().cancionProperty());
+        columnaAutor.setCellValueFactory(cellData -> cellData.getValue().artistaProperty());
+        columnaAlbun.setCellValueFactory(cellData -> cellData.getValue().discoProperty());
         vistaPrincipalController.setListaReproduccion(olist);
     }
 
@@ -132,19 +149,7 @@ public class Vista_menuController implements Initializable {
 
     @FXML
     void mostrarMenu(ActionEvent event) throws IOException {
-
-        if (mostrarMenu) {
-            animacionMenu.setFromX(-menu.getPrefWidth());
-            animacionMenu.setToX(0);
-            botonMenu.setText("<");
-            mostrarMenu = false;
-        } else {
-            animacionMenu.setFromX(0);
-            animacionMenu.setToX(-menu.getPrefWidth());
-            botonMenu.setText(">");
-            mostrarMenu = true;
-        }
-        animacionMenu.play();
+        animacionMostrarMenu();
     }
 
     void mostrarRepro() {
@@ -159,10 +164,18 @@ public class Vista_menuController implements Initializable {
         }
         animacionReproductor.play();
     }
-
-    void ocultarRepro() {
-        animacionReproductor.setFromX(0);
-        animacionReproductor.setToX(root.getPrefWidth());
-        animacionReproductor.play();
+    void animacionMostrarMenu(){
+         if (mostrarMenu) {
+            animacionMenu.setFromX(-menu.getPrefWidth());
+            animacionMenu.setToX(0);
+            botonMenu.setText("<");
+            mostrarMenu = false;
+        } else {
+            animacionMenu.setFromX(0);
+            animacionMenu.setToX(-menu.getPrefWidth());
+            botonMenu.setText(">");
+            mostrarMenu = true;
+        }
+        animacionMenu.play();
     }
 }

@@ -123,6 +123,9 @@ public class VistaPrincipalController implements Initializable {
         reproductor = new MediaPlayer(cancion.getMedio());
         reproductor.play();
         botonPlay.setText("| |");
+        
+        //MI CODIGO
+        
         reproductor.currentTimeProperty().addListener((o) -> {
             Platform.runLater(() -> {
                 sliderTiempo.setValue(reproductor.getCurrentTime().toMinutes() / reproductor.getTotalDuration().toMinutes());
@@ -211,7 +214,6 @@ public class VistaPrincipalController implements Initializable {
 
     public void setListaReproduccion(List<Cancion> listaReproduccion) {
         this.listaReproduccion = listaReproduccion;
-        //presentarMedio(this.listaReproduccion.get(cancionActual));
     }
 
 }
