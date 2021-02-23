@@ -134,7 +134,6 @@ public class Vista_menuController implements Initializable {
             Cancion song = new Cancion(file);
             olist.add(song);
         }
-        System.out.println(olist.size());
         vistaTabla.setItems(olist);
         columnaTitulo.setCellValueFactory(cellData -> cellData.getValue().cancionProperty());
         columnaAutor.setCellValueFactory(cellData -> cellData.getValue().artistaProperty());
